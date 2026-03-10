@@ -1,0 +1,161 @@
+---
+// src/components/About.astro
+
+const tools = [
+  { label: 'HTML5' },
+  { label: 'CSS3' },
+  { label: 'SASS/SCSS' },
+  { label: 'JavaScript ES6+' },
+  { label: 'BEM' },
+  { label: 'Astro',         variant: 'brown' },
+  { label: 'Git & GitHub',  variant: 'green' },
+  { label: 'NVDA',         variant: 'orange' },
+  { label: 'Siteimprove',     variant: 'gray' },
+  { label: 'WAVE',     variant: 'gray' },
+  { label: 'Lighthouse',    variant: 'gray' },
+  { label: 'axe DevTools',  variant: 'gray' },
+];
+---
+
+<section class="section section--alt" id="sobre-mi" aria-labelledby="about-title">
+  <div class="container">
+    <div class="section__header">
+      <h2 class="section__title" id="about-title">Sobre mí</h2>
+    </div>
+
+    <div class="about__grid">
+
+      <div class="about__text">
+        <h3 class="about__subtitle">Mi enfoque de trabajo</h3>
+        <p class="about__paragraph">
+          Soy un maquetador web con más de 5 años transformando diseños en interfaces que no solo
+          se ven bien, sino que también funcionan excepcionalmente en cualquier dispositivo y son
+          accesibles para todas las personas.
+        </p>
+        <p class="about__paragraph">
+          Mi metodología parte del <strong>HTML semántico</strong> como base sólida, construyo la
+          arquitectura de estilos con <strong>SASS</strong> siguiendo la metodología <strong>BEM</strong>
+          para garantizar componentes reutilizables y mantenibles, e integro todo en
+          <strong>Astro</strong> para conseguir sitios ultra-rápidos con cero JavaScript innecesario.
+        </p>
+        <p class="about__paragraph">
+          Me apasiona la accesibilidad: aplico las <strong>WCAG 2.1 nivel AA</strong> no como un
+          requisito, sino como parte natural de mi proceso. Creo firmemente que una web bien
+          construida debe ser para todo el mundo.
+        </p>
+
+        <h3 class="about__subtitle">Herramientas que domino</h3>
+        <ul class="about__tools" role="list" aria-label="Tecnologías y herramientas">
+          {tools.map(({ label, variant }) => (
+            <li>
+              <span class={`tag${variant ? ` tag--${variant}` : ''}`}>{label}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        <div class="about__card">
+          <h3 class="about__card-title">Experiencia</h3>
+          <ul class="about__list" role="list">
+            <li class="about__list-item">Altran / Capgemini - Maquetador Web (2018–actualidad)</li>
+          </ul>
+        </div>
+        <div class="about__card about__card--mt">
+          <h3 class="about__card-title">Formación</h3>
+          <ul class="about__list" role="list">
+            <li class="about__list-item"><a href="https://practical-accessibility.today/">Accesibility — Sara Souiedan (2026)</a>
+
+            </li>
+            <li class="about__list-item"><a href="https://www.weaaare.com/app">Curso WCAG & Accesibilidad Web — WEAAAre (2026)</a></li>
+            <li class="about__list-item"><a href="https://www.udemy.com/course/desarrollo-web-ultra-rapido-con-astro/?srsltid=AfmBOopQiL5RPrXryhIQCOd2CLEUNz-E5-nHd5uMhjXHxrRbFwtQBAMI">Desarrollo web ultra rapido con astro - Udemy (2024)</a></li>
+            <li class="about__list-item"><a href="https://www.udemy.com/course/introduccion-a-las-pruebas-de-usabilidad-ux-y-accesibilidad/?srsltid=AfmBOopOq14wBrWG9ZpOsSIATH2JAtHPPde2RH2SWGMX43glUJEqz0Ln">Introducción a las Pruebas de Usabilidad, UX y Accesibilidad - Udemy (2023)</a></li> 
+            <li class="about__list-item">Full Stack web development - Skylabcoders (2017)</li>
+            <li class="about__list-item">C.F.G.S Administración de sistemas informáticos - IE Esteve Terrades (2011)</li> 
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  /* =============================================
+     BLOCK: about
+  ============================================= */
+  .about__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+    align-items: start;
+  }
+
+  /* ELEMENT: about__subtitle */
+  .about__subtitle {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: var(--space-xs);
+    color: var(--color-text);
+  }
+
+  /* ELEMENT: about__paragraph */
+  .about__paragraph {
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+    margin-bottom: var(--space-md);
+    line-height: 1.75;
+  }
+
+  /* ELEMENT: about__tools */
+  .about__tools {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: var(--space-sm);
+  }
+
+  /* BLOCK: about__card */
+  .about__card {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+  }
+
+  /* MODIFIER: about__card--mt */
+  .about__card--mt { margin-top: var(--space-sm); }
+
+  /* ELEMENT: about__card-title */
+  .about__card-title {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: var(--space-sm);
+  }
+
+  /* ELEMENT: about__list-item */
+  .about__list-item {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--color-border);
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .about__list-item:last-child { border-bottom: none; }
+  .about__list-item::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 900px) {
+    .about__grid { grid-template-columns: 1fr; }
+  }
+</style>

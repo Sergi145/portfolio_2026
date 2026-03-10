@@ -1,0 +1,179 @@
+---
+// src/components/Hero.astro
+import { Image } from 'astro:assets';
+import foto from '../assets/foto.jpg';
+import cv from '../assets/curriculum_sergi.pdf';
+---
+
+<section class="hero section" id="inicio" aria-labelledby="hero-title">
+  <div class="container">
+    <div class="hero__inner">
+
+      <div class="hero__content">
+        <p class="hero__label" aria-hidden="true">Maquetador Web</p>
+
+        <h1 class="hero__title" id="hero-title">
+          Sergi Picazo<br />
+          <em class="hero__title-em">Maquetador Web</em>
+        </h1>
+
+        <p class="hero__desc">
+          Construyo interfaces web accesibles, limpias y de alto rendimiento con
+          <strong>HTML semántico</strong>, <strong>CSS/SASS</strong>,
+          <strong>JavaScript</strong> y metodología <strong>BEM</strong>.
+        </p>
+
+        <div class="hero__actions">
+          <a href="#proyectos" class="btn btn--primary">
+            <span class="visually-hidden">Ir a la sección</span>
+            Ver proyectos
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round"
+              aria-hidden="true" focusable="false">
+              <line x1="5" y1="12" x2="19" y2="12" />
+              <polyline points="12 5 19 12 12 19" />
+            </svg>
+          </a>
+          <a href={cv} aria-describedby="describe" class="btn btn--outline"
+            download>
+            Descargar CV
+          </a>
+          <span id="describe" class="visually-hidden">Descargar curriculum vitae de Sergi Picazo en PDF</span>
+        </div>
+
+        <div class="hero__stats" role="list" aria-label="Estadísticas profesionales">
+          <div class="hero__stat" role="listitem">
+            <span class="hero__stat-value">6+</span>
+            <span class="hero__stat-label">Años de experiencia</span>
+          </div>
+          <div class="hero__stat" role="listitem">
+            <span class="hero__stat-value">AA</span>
+            <span class="hero__stat-label">Conformidad WCAG</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero__avatar" aria-hidden="true">
+        <Image src={foto}  alt="Sergi Picazo Maquetador Web" />
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  /* =============================================
+     BLOCK: hero
+  ============================================= */
+  .hero__inner {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: var(--space-xl);
+    align-items: center;
+  }
+
+  /* ELEMENT: hero__label */
+  .hero__label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: var(--space-sm);
+  }
+
+  /* ELEMENT: hero__title */
+  .hero__title {
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem, 6vw, 3.8rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    margin-bottom: var(--space-md);
+  }
+
+  /* ELEMENT: hero__title-em */
+  .hero__title-em {
+    font-style: normal;
+    color: var(--color-accent);
+  }
+
+  /* ELEMENT: hero__desc */
+  .hero__desc {
+    font-size: 1.05rem;
+    color: var(--color-text-muted);
+    max-width: 520px;
+    margin-bottom: var(--space-lg);
+    line-height: 1.7;
+  }
+
+  /* ELEMENT: hero__actions */
+  .hero__actions {
+    display: flex;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+  }
+
+  /* ELEMENT: hero__stats */
+  .hero__stats {
+    display: flex;
+    gap: var(--space-lg);
+    margin-top: var(--space-lg);
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--color-border);
+    flex-wrap: wrap;
+  }
+
+  /* ELEMENT: hero__stat */
+  .hero__stat { display: flex; flex-direction: column; }
+
+  /* ELEMENT: hero__stat-value */
+  .hero__stat-value {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--color-text);
+    line-height: 1;
+  }
+
+  /* ELEMENT: hero__stat-label */
+  .hero__stat-label {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    margin-top: 0.25rem;
+  }
+
+  /* ELEMENT: hero__avatar */
+  .hero__avatar {
+    width: 200px;
+    height: 200px;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    flex-shrink: 0;
+    border: 3px solid var(--color-border);
+  }
+
+  .hero__avatar img {
+    height: auto;
+  }
+
+  /* ELEMENT: hero__avatar-placeholder */
+  .hero__avatar-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #ddd8cf 0%, #c8c3bb 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  @media (max-width: 900px) {
+    .hero__inner { grid-template-columns: 1fr; }
+    .hero__avatar { margin: 0 auto; }
+  }
+</style>

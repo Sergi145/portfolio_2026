@@ -1,0 +1,57 @@
+---
+// src/components/ServiceCard.astro
+
+const { icon, title, description } = Astro.props;
+---
+
+<article class="service-card">
+  <div class="service-card__icon" aria-hidden="true">{icon}</div>
+  <h3 class="service-card__title">{title}</h3>
+  <p class="service-card__desc">{description}</p>
+</article>
+
+<style>
+  /* =============================================
+     BLOCK: service-card
+  ============================================= */
+  .service-card {
+    height: 100%;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+    transition: box-shadow var(--transition), transform var(--transition);
+  }
+  .service-card:hover {
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-3px);
+  }
+
+  /* ELEMENT: service-card__icon */
+  .service-card__icon {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-sm);
+    background: var(--color-tag-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--space-sm);
+    font-size: 1.3rem;
+  }
+
+  /* ELEMENT: service-card__title */
+  .service-card__title {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  /* ELEMENT: service-card__desc */
+  .service-card__desc {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    line-height: 1.65;
+  }
+</style>

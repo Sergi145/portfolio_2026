@@ -1,0 +1,212 @@
+---
+// src/layouts/BaseLayout.astro
+// Sin TypeScript: las props se reciben como objeto plano de JS
+
+const {
+  title = 'Sergi Picazo— Maquetador Web',
+  description = 'Portfolio de Sergi Picazo, maquetador web especializado en HTML semántico, CSS/SASS, BEM, JavaScript y Astro. Accesibilidad WCAG incluida.',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="author" content="Sergi Picazo" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_ES" />
+
+    <title>{title}</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <!-- Skip link WCAG 2.4.1 -->
+    <a class="skip-link" href="#main-content">Saltar al contenido principal</a>
+
+    <slot />
+  </body>
+</html>
+
+<!-- Estilos globales inyectados via SASS -->
+<style is:global>
+  /* =============================================
+     DESIGN TOKENS
+  ============================================= */
+  :root {
+    --color-bg:               #f5f4f0;
+    --color-surface:          #ffffff;
+    --color-surface-alt:      #edecea;
+    --color-accent:           #b73a1a;
+    --color-accent-hover:     #c44b1a;
+    --color-text:             #1a1a1a;
+    --color-text-muted:       #6b6860;
+    --color-border:           #dddbd6;
+    --color-tag-bg:           #ede9ff;
+    --color-tag-text:         #4a2ec2;
+    --color-tag-green-bg:     #e2f5ec;
+    --color-tag-green-text:   #186640;
+    --color-tag-orange-bg:    #fff0e6;
+    --color-tag-orange-text:  #a84300;
+    --color-tag-gray-bg:      #edecea;
+    --color-tag-gray-text:    #6b6860;
+    --font-display:           'Syne', sans-serif;
+    --font-body:              'DM Sans', sans-serif;
+    --space-xs:   0.5rem;
+    --space-sm:   1rem;
+    --space-md:   1.5rem;
+    --space-lg:   2.5rem;
+    --space-xl:   4rem;
+    --space-2xl:  6rem;
+    --radius-sm:   0.5rem;
+    --radius-md:   1rem;
+    --radius-lg:   1.5rem;
+    --radius-pill: 999px;
+    --shadow-card:  0 2px 12px rgba(0,0,0,0.06);
+    --shadow-hover: 0 8px 28px rgba(0,0,0,0.10);
+    --transition: 0.25s ease;
+    --max-width: 1100px;
+  }
+
+  /* RESET */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; font-size: 16px; }
+  body {
+    font-family: var(--font-body);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; }
+  ul { list-style: none; }
+
+  /* SKIP LINK — WCAG 2.4.1 */
+  .skip-link {
+    position: absolute;
+    top: -100%;
+    left: 1rem;
+    background: var(--color-accent);
+    color: #fff;
+    padding: 0.75rem 1.25rem;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-display);
+    font-weight: 700;
+    z-index: 9999;
+    text-decoration: none;
+    transition: top var(--transition);
+  }
+  .skip-link:focus { top: 1rem; }
+
+  /* FOCUS VISIBLE — WCAG 2.4.7 */
+  :focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+
+  /* LAYOUT */
+  .container {
+    width: 100%;
+    max-width: var(--max-width);
+    margin-inline: auto;
+    padding-inline: var(--space-md);
+  }
+  .section { padding-block: var(--space-2xl); }
+  .section--alt { background-color: var(--color-surface); }
+  .section__header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-lg);
+    flex-wrap: wrap;
+  }
+  .section__title {
+    font-family: var(--font-display);
+    font-size: clamp(1.35rem, 3vw, 1.7rem);
+    font-weight: 700;
+  }
+  .section__link {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color var(--transition);
+  }
+  .section__link:hover, .section__link:focus { color: var(--color-accent-hover); }
+
+  /* TAGS */
+  .tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 0.25em 0.75em;
+    border-radius: var(--radius-pill);
+    background: var(--color-tag-bg);
+    color: var(--color-tag-text);
+  }
+  .tag--green  { background: var(--color-tag-green-bg);  color: var(--color-tag-green-text); }
+  .tag--orange { background: var(--color-tag-orange-bg); color: var(--color-tag-orange-text); }
+  .tag--gray   { background: var(--color-tag-gray-bg);   color: var(--color-tag-gray-text); }
+  
+
+  /* BOTONES */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-pill);
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: background var(--transition), color var(--transition),
+                border-color var(--transition), transform var(--transition);
+  }
+  .btn:focus-visible { outline: 3px solid var(--color-accent); outline-offset: 3px; }
+  .btn--primary { background: var(--color-accent); color: #fff; }
+  .btn--primary:hover, .btn--primary:focus { background: var(--color-accent-hover); transform: translateY(-2px); }
+  .btn--outline { background: transparent; color: var(--color-accent); border-color: var(--color-accent); }
+  .btn--outline:hover, .btn--outline:focus { background: var(--color-accent); color: #fff; transform: translateY(-2px); }
+  .btn--outline-light { background: transparent; color: #f5f4f0; border-color: rgba(245,244,240,0.4); }
+  .btn--outline-light:hover, .btn--outline-light:focus { background: rgba(245,244,240,0.1); border-color: #f5f4f0; }
+
+  /* ANIMACIONES */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap; /* evita saltos de línea */
+  border: 0;
+}
+</style>

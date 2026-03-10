@@ -1,0 +1,179 @@
+// src/styles/_utils.scss
+// =============================================
+// UTILIDADES GLOBALES: layout, tags, botones
+// =============================================
+
+// --------------------------------------------------
+// LAYOUT
+// --------------------------------------------------
+
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin-inline: auto;
+  padding-inline: var(--space-md);
+}
+
+.section {
+  padding-block: var(--space-2xl);
+
+  &--alt {
+    background-color: var(--color-surface);
+  }
+
+  &__header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-lg);
+    flex-wrap: wrap;
+  }
+
+  &__title {
+    font-family: var(--font-display);
+    font-size: clamp(1.35rem, 3vw, 1.7rem);
+    font-weight: 700;
+    color: var(--color-text);
+  }
+
+  &__link {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color var(--transition);
+
+    &:hover,
+    &:focus {
+      color: var(--color-accent-hover);
+    }
+  }
+}
+
+// --------------------------------------------------
+// SKIP LINK (WCAG 2.4.1)
+// --------------------------------------------------
+
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  background: var(--color-accent);
+  color: #fff;
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-display);
+  font-weight: 700;
+  z-index: 9999;
+  text-decoration: none;
+  transition: top var(--transition);
+
+  &:focus {
+    top: 1rem;
+  }
+}
+
+// --------------------------------------------------
+// TAGS / BADGES — BEM
+// --------------------------------------------------
+
+.tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.25em 0.75em;
+  border-radius: var(--radius-pill);
+  background: var(--color-tag-bg);
+  color: var(--color-tag-text);
+
+  &--green {
+    background: var(--color-tag-green-bg);
+    color: var(--color-tag-green-text);
+  }
+
+  &--orange {
+    background: var(--color-tag-orange-bg);
+    color: var(--color-tag-orange-text);
+  }
+
+  &--gray {
+    background: var(--color-tag-gray-bg);
+    color: var(--color-tag-gray-text);
+  }
+}
+
+// --------------------------------------------------
+// BOTONES — BEM
+// --------------------------------------------------
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition:
+    background var(--transition),
+    color var(--transition),
+    border-color var(--transition),
+    transform var(--transition);
+
+  &:focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+
+  // Modificador: primary
+  &--primary {
+    background: var(--color-accent);
+    color: #fff;
+
+    &:hover,
+    &:focus {
+      background: var(--color-accent-hover);
+      transform: translateY(-2px);
+    }
+  }
+
+  // Modificador: outline
+  &--outline {
+    background: transparent;
+    color: var(--color-accent);
+    border-color: var(--color-accent);
+
+    &:hover,
+    &:focus {
+      background: var(--color-accent);
+      color: #fff;
+      transform: translateY(-2px);
+    }
+  }
+
+  // Modificador: outline-light (para fondos oscuros)
+  &--outline-light {
+    background: transparent;
+    color: #f5f4f0;
+    border-color: rgba(245, 244, 240, 0.4);
+
+    &:hover,
+    &:focus {
+      background: rgba(245, 244, 240, 0.1);
+      border-color: #f5f4f0;
+    }
+  }
+}
+
+
+
+
+

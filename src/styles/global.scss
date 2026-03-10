@@ -1,0 +1,6 @@
+// src/styles/global.scss
+// Entry point — importa todos los partials en orden
+
+@use 'tokens';   // 1. Design tokens (CSS custom properties)
+@use 'reset';    // 2. Reset y estilos base
+@use 'utils';    // 3. Helpers globales: layout, tags, botones

@@ -1,0 +1,102 @@
+---
+// src/pages/index.astro
+// Sin TypeScript — imports con extensión .js explícita
+
+import BaseLayout   from '../layouts/BaseLayout.astro';
+import Header       from '../components/Header.astro';
+import Hero         from '../components/Hero.astro';
+import About        from '../components/About.astro';
+import ServiceCard  from '../components/ServiceCard.astro';
+import ProjectCard  from '../components/ProjectCard.astro';
+import Skills       from '../components/Skills.astro';
+import Cta          from '../components/Cta.astro';
+import Footer       from '../components/Footer.astro';
+
+import { services } from '../data/services.js';
+import { projects } from '../data/projects.js';
+
+---
+
+<BaseLayout>
+  <Header />
+
+  <main id="main-content" aria-label="contenido principal">
+
+    <!-- HERO -->
+    <Hero />
+
+   
+
+    <!-- SOBRE MÍ -->
+    <About />
+
+    <!-- SERVICIOS -->
+    <section class="section section--alt" id="servicios" aria-labelledby="services-title">
+      <div class="container">
+        <div class="section__header">
+          <h2 class="section__title" id="services-title">Servicios</h2>
+        </div>
+        <ul class="services-grid" role="list">
+          {services.map((service) => (
+            <li>
+              <ServiceCard {...service} />
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <!-- PROYECTOS DESTACADOS -->
+    <section class="section" id="proyectos" aria-labelledby="projects-title">
+      <div class="container">
+        <div class="section__header">
+          <h2 class="section__title" id="projects-title">Proyectos destacados</h2>
+        </div>
+        <ul class="projects-list" role="list">
+          {projects.map((project) => (
+            <li>
+              <ProjectCard project={project} />
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <!-- HABILIDADES -->
+    <Skills />
+
+    <!-- CTA FINAL -->
+    <Cta />
+
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  /* Grids de la página */
+  .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--space-md);
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    gap: var(--space-md);
+  }
+
+  .projects-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  @media (max-width: 640px) {
+    .posts-grid,
+    .services-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

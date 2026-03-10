@@ -1,0 +1,188 @@
+---
+// src/components/Header.astro
+
+const navLinks = [
+  { href: '#sobre-mi',    label: 'Sobre mí' },
+  { href: '#servicios',   label: 'Servicios' },
+  { href: '#proyectos',   label: 'Proyectos' },
+  { href: '#habilidades', label: 'Habilidades' },
+];
+---
+
+<header class="site-header" role="banner">
+  <div class="container">
+    <nav class="nav" aria-label="Navegación principal">
+
+      <span class="nav__logo">
+        SP<span class="nav__logo-dot">.</span>
+      </span>
+
+      <!-- Botón hamburguesa (mobile) -->
+      <button
+        class="nav__toggle"
+        aria-expanded="false"
+        aria-controls="nav-list"
+        aria-label="Abrir menú de navegación"
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          aria-hidden="true" focusable="false">
+          <line x1="3" y1="6"  x2="21" y2="6"  />
+          <line x1="3" y1="12" x2="21" y2="12" />
+          <line x1="3" y1="18" x2="21" y2="18" />
+        </svg>
+      </button>
+
+      <ul class="nav__list" id="nav-list" role="list">
+        {navLinks.map(({ href, label }) => (
+          <li>
+             
+            <a class="nav__link" href={href}><span class="visually-hidden">Ir a la sección</span>{label}</a>
+          </li>
+        ))}
+        <li>
+          <a class="nav__link nav__link--cta btn btn--primary" href="#contacto">
+            <span class="visually-hidden">Ir a la sección</span> Contáctame
+          </a>
+          
+        </li>
+      </ul>
+
+    </nav>
+  </div>
+</header>
+
+<style>
+  /* =============================================
+     BLOCK: site-header
+  ============================================= */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(245, 244, 240, 0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  /* =============================================
+     BLOCK: nav
+  ============================================= */
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-block: 1rem;
+    gap: var(--space-sm);
+  }
+
+  /* ELEMENT: nav__logo */
+  .nav__logo {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--color-text);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+  .nav__logo-dot { color: var(--color-accent); }
+
+  /* ELEMENT: nav__toggle */
+  .nav__toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.25rem;
+    color: var(--color-text);
+  }
+  .nav__toggle:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 3px;
+  }
+
+  /* ELEMENT: nav__list */
+  .nav__list {
+    display: flex;
+    gap: var(--space-md);
+    align-items: center;
+  }
+
+  /* ELEMENT: nav__link */
+  .nav__link {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color var(--transition);
+  }
+  .nav__link:hover, .nav__link:focus { color: var(--color-text); }
+  .nav__link:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 3px;
+  }
+
+  /* MODIFIER: nav__link--cta */
+  .nav__link--cta {
+    color: #fff;
+    margin-left: var(--space-xs);
+  }
+  .nav__link--cta:hover, .nav__link--cta:focus { color: #fff; }
+
+  /* RESPONSIVE */
+  @media (max-width: 640px) {
+    .nav__list { display: none; }
+
+    .nav__list.is-open {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: var(--color-bg);
+      border-bottom: 1px solid var(--color-border);
+      padding: var(--space-sm) var(--space-md);
+      gap: var(--space-sm);
+      z-index: 200;
+    }
+
+    .nav__toggle { display: block; }
+    .nav__link--cta { display: none; }
+  }
+</style>
+
+<script>
+  // JavaScript vanilla 
+  const toggle = document.querySelector('.nav__toggle');
+  const navList = document.querySelector('.nav__list');
+
+  toggle.addEventListener('click', () => {
+    const expanded = toggle.getAttribute('aria-expanded') === 'true';
+     const newState = !expanded;
+
+    toggle.setAttribute('aria-expanded', String(!expanded));
+    navList.classList.toggle('is-open');
+
+    
+// Cambiar aria-label dinámicamente
+    toggle.setAttribute(
+      'aria-label',
+      newState ? 'Cerrar menú de navegación' : 'Abrir menú de navegación'
+    );
+
+  });
+
+  navList.querySelectorAll('.nav__link').forEach((link) => {
+    link.addEventListener('click', () => {
+      navList.classList.remove('is-open');
+      toggle.setAttribute('aria-expanded', 'false');
+      
+   // Volver a poner la etiqueta accesible correcta
+      toggle.setAttribute('aria-label', 'Abrir menú de navegación');
+
+    });
+  });
+</script>

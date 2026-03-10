@@ -1,0 +1,183 @@
+---
+// src/components/Skills.astro
+
+import { hardSkills, softSkills } from '../data/skills.js';
+---
+
+<section class="section section--alt" id="habilidades" aria-labelledby="skills-title">
+  <div class="container">
+    <div class="section__header">
+      <h2 class="section__title" id="skills-title">Habilidades</h2>
+    </div>
+
+    <div class="skills__grid">
+
+      <!-- Hard skills -->
+      <div class="skills__col">
+        <h3 class="skills__col-title" id="hability-a">Habilidades técnicas</h3>
+        <ul role="list" aria-labelledby="hability-a">
+          {hardSkills.map(({ name, level }) => (
+            <li class="skill-item">
+              <div class="skill-item__top">
+                <span>{name}</span>
+                <span aria-label={`Nivel ${level}%`}>{level}%</span>
+              </div>
+              <div
+                class="skill-item__bar"
+                role="progressbar"
+                aria-valuenow={level}
+                aria-valuemin={0}
+                aria-valuemax={100}
+                aria-label={`${name} ${level}%`}
+              >
+                <div
+                  class="skill-item__fill"
+                  style={`--bar-width: ${level}%`}
+                  data-width={`${level}%`}
+                />
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Soft skills -->
+      <div class="skills__col">
+        <h3 class="skills__col-title" id="hability-b">Habilidades blandas</h3>
+        <ul class="soft-skills__list" role="list" aria-labelledby="hability-b">
+          {softSkills.map(({ icon, name, description }) => (
+            <li class="soft-skill">
+              <span class="soft-skill__icon" aria-hidden="true">{icon}</span>
+              <div class="soft-skill__content">
+                <p class="soft-skill__name">{name}</p>
+                <p class="soft-skill__desc">{description}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  /* =============================================
+     BLOCK: skills
+  ============================================= */
+  .skills__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg);
+  }
+
+  /* ELEMENT: skills__col-title */
+  .skills__col-title {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: var(--space-md);
+    padding-bottom: var(--space-xs);
+    border-bottom: 2px solid var(--color-accent);
+    display: inline-block;
+  }
+
+  /* =============================================
+     BLOCK: skill-item
+  ============================================= */
+  .skill-item { margin-bottom: var(--space-sm); }
+
+  /* ELEMENT: skill-item__top */
+  .skill-item__top {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-bottom: 0.3rem;
+  }
+
+  /* ELEMENT: skill-item__bar */
+  .skill-item__bar {
+    height: 6px;
+    background: var(--color-surface-alt);
+    border-radius: var(--radius-pill);
+    overflow: hidden;
+  }
+
+  /* ELEMENT: skill-item__fill */
+  .skill-item__fill {
+    height: 100%;
+    width: 0;
+    background: var(--color-accent);
+    border-radius: var(--radius-pill);
+    transition: width 1s ease;
+  }
+
+  /* MODIFIER: is-animated (añadido por JS) */
+  .skill-item__fill.is-animated {
+    width: var(--bar-width);
+  }
+
+  /* =============================================
+     BLOCK: soft-skill
+  ============================================= */
+  .soft-skills__list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .soft-skill {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-sm);
+    padding: 0.75rem var(--space-sm);
+    background: var(--color-bg);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-border);
+    font-size: 0.875rem;
+  }
+
+  /* ELEMENT: soft-skill__icon */
+  .soft-skill__icon {
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* ELEMENT: soft-skill__name */
+  .soft-skill__name {
+    font-weight: 600;
+    margin-bottom: 0.15rem;
+    color: var(--color-text);
+  }
+
+  /* ELEMENT: soft-skill__desc */
+  .soft-skill__desc {
+    color: var(--color-text-muted);
+    line-height: 1.5;
+  }
+
+  @media (max-width: 900px) {
+    .skills__grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+<script>
+  // JavaScript vanilla — animar barras al hacer scroll
+  const fills = document.querySelectorAll('.skill-item__fill');
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-animated');
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.3 }
+  );
+
+  fills.forEach((el) => observer.observe(el));
+</script>

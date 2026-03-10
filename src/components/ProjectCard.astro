@@ -1,0 +1,154 @@
+---
+// src/components/ProjectCard.astro
+
+const { project } = Astro.props;
+const {
+  title,
+  year,
+  category,
+  categoryVariant,
+  thumbClass,
+  thumbInitials,
+  challenge,
+  solution,
+  tech,
+} = project;
+
+const tagClass = categoryVariant ? `tag--${categoryVariant}` : 'tag--gray';
+---
+
+<article class="project-card">
+
+  <div class={`project-card__thumb ${thumbClass}`}>
+    <span aria-hidden="true">{thumbInitials}</span>
+  </div>
+
+  <div class="project-card__body">
+    <header class="project-card__header">
+      <h3 class="project-card__title">{title}</h3>
+      <span class="project-card__year">{year}</span>
+      <span class={`tag ${tagClass}`}>{category}</span>
+    </header>
+
+    <div class="project-card__block">
+      <p class="project-card__block-label">El reto</p>
+      <p class="project-card__block-text">{challenge}</p>
+    </div>
+
+    <div class="project-card__block">
+      <p class="project-card__block-label">La solución</p>
+      <p class="project-card__block-text">{solution}</p>
+    </div>
+
+    <ul class="project-card__tech" aria-label="Tecnologías usadas" role="list">
+      {tech.map((t) => (
+        <li><span class="tag tag--gray">{t}</span></li>
+      ))}
+    </ul>
+  </div>
+
+</article>
+
+<style>
+  /* =============================================
+     BLOCK: project-card
+  ============================================= */
+  .project-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    transition: box-shadow var(--transition), transform var(--transition);
+  }
+  .project-card:hover {
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-2px);
+  }
+
+  /* ELEMENT: project-card__thumb */
+  .project-card__thumb {
+    height: 100%;
+    min-height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    font-weight: 800;
+    font-family: var(--font-display);
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  /* MODIFIERS: color de fondo del thumbnail */
+  .project-card__thumb--dark   { background: #1a1a2e; }
+  .project-card__thumb--violet { background: linear-gradient(135deg, #6c3fce, #a35cff); }
+  .project-card__thumb--green  { background: linear-gradient(135deg, #0d6e4b, #1db97a); }
+  .project-card__thumb--coral  { background: linear-gradient(135deg, #b83224, #b73a1a); }
+  .project-card__thumb--slate  { background: linear-gradient(135deg, #2d3954, #4c6fb5); }
+
+  /* ELEMENT: project-card__body */
+  .project-card__body { padding: var(--space-md); }
+
+  /* ELEMENT: project-card__header */
+  .project-card__header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  /* ELEMENT: project-card__title */
+  .project-card__title {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 700;
+    flex: 1;
+    min-width: 0;
+  }
+
+  /* ELEMENT: project-card__year */
+  .project-card__year {
+    font-size: 0.75rem;
+    font-weight: 600;
+    background: var(--color-surface-alt);
+    color: var(--color-text-muted);
+    padding: 0.2em 0.6em;
+    border-radius: var(--radius-pill);
+    white-space: nowrap;
+  }
+
+  /* ELEMENT: project-card__block */
+  .project-card__block { margin-bottom: 0.75rem; }
+
+  /* ELEMENT: project-card__block-label */
+  .project-card__block-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin-bottom: 0.25rem;
+  }
+
+  /* ELEMENT: project-card__block-text */
+  .project-card__block-text {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+  }
+
+  /* ELEMENT: project-card__tech */
+  .project-card__tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: var(--space-sm);
+  }
+
+  @media (max-width: 900px) {
+    .project-card { grid-template-columns: 1fr; }
+    .project-card__thumb { min-height: 120px; }
+  }
+</style>
