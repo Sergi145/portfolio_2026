@@ -5,6 +5,16 @@ on:
     branches: [ master ]
   workflow_dispatch:
 
+# 👉 Permisos necesarios para Pages (a nivel de workflow)
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -17,11 +27,12 @@ jobs:
           node-version: 20
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Build
         run: npm run build
 
+      # 👉 Empaqueta la carpeta `dist` que genera Astro
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
@@ -30,8 +41,15 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    permissions:
-      pages: write
-      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/deploy-pages@v4
+      # 👉 Configura GitHub Pages (imprescindible antes de deploy)
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      # 👉 Publica en GitHub Pages
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
