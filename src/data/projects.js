@@ -1,74 +1,51 @@
 // src/data/projects.js
 
+
+
+
 export const projects = [
   {
-    id: 'bizflow',
-    title: 'BizFlow — Dashboard de analítica',
+    id: 'Telefónica',
+    title: 'Telefónica - Copérnico',
     year: '2025',
-    category: 'Dashboard',
+    category: 'Plantillas',
     categoryVariant: 'purple',
     thumbClass: 'project-card__thumb--dark',
-    thumbInitials: 'BF',
+    thumbImage: 'projects/telefonica.jpg',
+    thumbAlt: 'Telefonica',
     challenge:
-      'Maquetar un dashboard complejo con más de 40 componentes distintos asegurando consistencia visual y conformidad WCAG AA, partiendo de un Figma poco documentado.',
-    solution:
-      'Construí un design system en SASS con tokens de diseño, componentes BEM documentados en Storybook y gestión de estados visuales con custom properties CSS. Cero dependencias de JavaScript para estilos.',
-    tech: ['Astro', 'SASS/BEM', 'Storybook', 'WCAG AA'],
+      'Actualización y mantenimiento de plantillas corporativas de Telefónica con implementación de cambios en HTML para asegurar consistencia en la maquetación y gestión básica de la base de datos realizada en Oracle.',
+
+    tech: ['HTML', 'ORACLE'],
   },
   {
-    id: 'lumina',
-    title: 'Lumina — E-commerce de fotografía',
-    year: '2024',
-    category: 'E-commerce',
+    id: 'Generalitat',
+    title: 'Generalitat de Catalunya — GECO+',
+    year: '2020 - 2024',
+    category: 'Open CMS',
     categoryVariant: 'green',
     thumbClass: 'project-card__thumb--violet',
-    thumbInitials: 'LM',
+    thumbImage: 'projects/logo_gene.png',
+    thumbAlt: 'Generalitar de Catalunya',
     challenge:
-      'Tienda online con catálogo de más de 500 productos. La web existente tenía un LCP de 8 s y un Cumulative Layout Shift de 0.45. Objetivo: Lighthouse 95+.',
+      'Contribución en la realización a nivel de maquetación de diferentes componentes para la plataforma OpenCms para la Generalitat de Catalunya y realización de informes detallados sobre accesibilidad web, incluyendo análisis automáticos y manuales para la detección de errores mediante herramientas como el Observatorio de Accesibilidad del Gobierno de España y Siteimprove.',
     solution:
-      'Migración a Astro con carga parcial de JS, imágenes en WebP con dimensiones reservadas para eliminar el CLS, y refactorización completa del CSS con SASS partials. Resultado: LCP 1.4 s, Lighthouse 97.',
-    tech: ['Astro', 'CSS Grid', 'Sanity CMS', 'Core Web Vitals'],
+      'https://guiaweb.gencat.cat/ca/cataleg/',
+    tech: ['HTML','PUG', 'CSS/SASS', 'Jquery', 'Bootstrap 3','WCAG','Siteimprove','Observatorio de accesibilidad','GIT'],
   },
   {
-    id: 'ecohuella',
-    title: 'EcoHuella — Portal de sostenibilidad',
-    year: '2024',
-    category: 'Portal web',
-    categoryVariant: 'green',
-    thumbClass: 'project-card__thumb--green',
-    thumbInitials: 'EH',
-    challenge:
-      'ONG con audiencia diversa (usuarios mayores, baja visión). Necesitaban cumplir WCAG 2.1 AA como requisito legal y mejorar la tasa de completado de formularios en un 30%.',
-    solution:
-      'Auditoría con axe DevTools, rediseño de formularios con etiquetas visibles y errores descriptivos, foco de teclado visible en todos los interactivos y skip links para lectores de pantalla. Tasa de completado +42%.',
-    tech: ['HTML semántico', 'WCAG 2.1 AA', 'WordPress', 'axe DevTools'],
-  },
-  {
-    id: 'nomadhq',
-    title: 'NomadHQ — Landing page SaaS',
-    year: '2023',
-    category: 'Landing · SaaS',
+    id: 'Feina Activa',
+    title: 'Generalitat de Catalunya - Feina Activa',
+    year: '2018 - 2020',
+    category: 'Web Page',
     categoryVariant: 'orange',
     thumbClass: 'project-card__thumb--coral',
-    thumbInitials: 'NQ',
+    thumbImage: 'projects/feina_activa.jpg',
+    thumbAlt: 'Feina Activa',
     challenge:
-      'Startup necesitaba una landing page que convirtiera visitas en registros. El equipo entregó un Figma con animaciones complejas y el plazo era de solo dos semanas.',
+      'Contribución en la realización de los diversos componentes para el proyecto de ‘Feina Activa’ para la Generalitat de Catalunya.',
     solution:
-      'Componentes Astro reutilizables con animaciones CSS puras (sin libraries JS), CSS scroll-driven animations para los scroll reveals y estructura BEM que permitió iterar textos sin tocar el CSS. Entregado en 11 días.',
-    tech: ['Astro', 'CSS Animations', 'JavaScript ES6', 'BEM'],
-  },
-  {
-    id: 'archilab',
-    title: 'ArchiLab — Portfolio de arquitectura',
-    year: '2023',
-    category: 'Portfolio',
-    categoryVariant: 'gray',
-    thumbClass: 'project-card__thumb--slate',
-    thumbInitials: 'AL',
-    challenge:
-      'Estudio de arquitectura con galería muy visual. Necesitaban transiciones fluidas entre páginas y carga rápida de imágenes de alta resolución sin comprometer la calidad.',
-    solution:
-      'View Transitions API nativa de Astro para transiciones entre páginas, lazy loading con IntersectionObserver, imágenes con srcset y el componente Image de Astro. Performance Score: 98.',
-    tech: ['Astro', 'View Transitions', 'SASS', 'Image Optimization'],
-  },
+      'https://feinaactiva.gencat.cat/es/home',
+    tech: ['HTML', 'CSS/SASS', 'Jquery', 'Bootstrap 4','Atomic Desing','Handlebars','GIT'],
+  }
 ];

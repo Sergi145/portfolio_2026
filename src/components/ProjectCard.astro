@@ -1,5 +1,9 @@
 ---
 // src/components/ProjectCard.astro
+// src/components/Hero.astro
+import { Image } from 'astro:assets';
+import telefonica from '../assets/telefonica.jpg';
+import cv from '../assets/curriculum_sergi.pdf';
 
 const { project } = Astro.props;
 const {
@@ -7,8 +11,8 @@ const {
   year,
   category,
   categoryVariant,
-  thumbClass,
-  thumbInitials,
+  thumbImage,
+  thumbAlt,
   challenge,
   solution,
   tech,
@@ -19,8 +23,8 @@ const tagClass = categoryVariant ? `tag--${categoryVariant}` : 'tag--gray';
 
 <article class="project-card">
 
-  <div class={`project-card__thumb ${thumbClass}`}>
-    <span aria-hidden="true">{thumbInitials}</span>
+  <div class="project-card__thumb">
+    <img src={thumbImage} alt={thumbAlt}/>
   </div>
 
   <div class="project-card__body">
@@ -31,13 +35,12 @@ const tagClass = categoryVariant ? `tag--${categoryVariant}` : 'tag--gray';
     </header>
 
     <div class="project-card__block">
-      <p class="project-card__block-label">El reto</p>
+      <p class="project-card__block-label">Funciones</p>
       <p class="project-card__block-text">{challenge}</p>
     </div>
 
     <div class="project-card__block">
-      <p class="project-card__block-label">La solución</p>
-      <p class="project-card__block-text">{solution}</p>
+      <a href={solution} class="project-card__block-text">{solution}</a>
     </div>
 
     <ul class="project-card__tech" aria-label="Tecnologías usadas" role="list">
