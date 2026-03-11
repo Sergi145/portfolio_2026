@@ -140,6 +140,7 @@ const tagClass = categoryVariant ? `tag--${categoryVariant}` : 'tag--gray';
     font-size: 0.875rem;
     color: var(--color-text-muted);
     line-height: 1.6;
+    word-wrap: break-word;
   }
 
   /* ELEMENT: project-card__tech */
@@ -153,5 +154,17 @@ const tagClass = categoryVariant ? `tag--${categoryVariant}` : 'tag--gray';
   @media (max-width: 900px) {
     .project-card { grid-template-columns: 1fr; }
     .project-card__thumb { min-height: 120px; }
+
+    
+  }
+
+    @media (max-width: 576px) {
+        .project-card__header {
+      flex-direction: column;
+    }
+
+    .project-card {
+      display: block;
+    }
   }
 </style>
