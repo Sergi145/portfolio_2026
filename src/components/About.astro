@@ -1,5 +1,40 @@
 ---
 // src/components/About.astro
+import saraCert from '../assets/certificates/sara_souiedan.pdf';
+import weaaareAuditorias from '../assets/certificates/Certificado - Auditorías de Accesibilidad Digital - weAAAre.pdf';
+import weaaareMovil from '../assets/certificates/Certificado - Introducción a la accesibilidad móvil - weAAAre.pdf';
+import weaaareNvda from '../assets/certificates/Certificado - Pruebas de accesibilidad con lector de pantalla NVDA - weAAAre.pdf';
+
+// En dev, Astro sirve los assets importados de src/assets sin el prefijo `base`
+// configurado en astro.config.mjs, pero su middleware de dev exige ese prefijo
+// para navegaciones directas (Accept: text/html), como al abrir un enlace en
+// pestaña nueva. En build, la URL del import ya incluye el `base`, así que aquí
+// solo se antepone en dev.
+const withBase = (url: string) =>
+  import.meta.env.DEV ? `${import.meta.env.BASE_URL}${url.replace(/^\//, '')}` : url;
+
+const formacion = [
+  {
+    title: 'Accesibility — Sara Souiedan (2026)',
+    href: 'https://practical-accessibility.today/',
+    cert: withBase(saraCert),
+  },
+  {
+    title: 'Auditorías de Accesibilidad Digital — WEAAAre (2026)',
+    href: 'https://www.weaaare.com/app',
+    cert: withBase(weaaareAuditorias),
+  },
+  {
+    title: 'Introducción a la accesibilidad móvil — WEAAAre (2026)',
+    href: 'https://www.weaaare.com/app',
+    cert: withBase(weaaareMovil),
+  },
+  {
+    title: 'Pruebas de accesibilidad con lector de pantalla NVDA — WEAAAre (2026)',
+    href: 'https://www.weaaare.com/app',
+    cert: withBase(weaaareNvda),
+  },
+];
 
 const tools = [
   { label: 'HTML5' },
@@ -65,14 +100,31 @@ const tools = [
         <div class="about__card about__card--mt">
           <h3 class="about__card-title">Formación</h3>
           <ul class="about__list" role="list">
-            <li class="about__list-item"><a href="https://practical-accessibility.today/">Accesibility — Sara Souiedan (2026)</a>
-
-            </li>
-            <li class="about__list-item"><a href="https://www.weaaare.com/app">Curso WCAG & Accesibilidad Web — WEAAAre (2026)</a></li>
-            <li class="about__list-item"><a href="https://www.udemy.com/course/desarrollo-web-ultra-rapido-con-astro/?srsltid=AfmBOopQiL5RPrXryhIQCOd2CLEUNz-E5-nHd5uMhjXHxrRbFwtQBAMI">Desarrollo web ultra rapido con astro - Udemy (2024)</a></li>
-            <li class="about__list-item"><a href="https://www.udemy.com/course/introduccion-a-las-pruebas-de-usabilidad-ux-y-accesibilidad/?srsltid=AfmBOopOq14wBrWG9ZpOsSIATH2JAtHPPde2RH2SWGMX43glUJEqz0Ln">Introducción a las Pruebas de Usabilidad, UX y Accesibilidad - Udemy (2023)</a></li> 
+            {formacion.map(({ title, href, cert }) => (
+              <li class="about__list-item">
+                <div class="about__list-content">
+                  <a href={href} class="about__list-link">{title}</a>
+                  <a
+                    href={cert}
+                    class="about__cert-link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Ver certificado en PDF — ${title} (se abre en una pestaña nueva)`}
+                  >
+                    Certificado
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2.5"
+                      stroke-linecap="round" stroke-linejoin="round"
+                      aria-hidden="true" focusable="false">
+                      <path d="M7 17 17 7" />
+                      <path d="M8 7h9v9" />
+                    </svg>
+                  </a>
+                </div>
+              </li>
+            ))}
             <li class="about__list-item">Full Stack web development - Skylabcoders (2017)</li>
-            <li class="about__list-item">C.F.G.S Administración de sistemas informáticos - IE Esteve Terrades (2011)</li> 
+            <li class="about__list-item">C.F.G.S Administración de sistemas informáticos - IE Esteve Terrades (2011)</li>
           </ul>
         </div>
       </div>
@@ -143,7 +195,7 @@ const tools = [
     font-size: 0.9rem;
     color: var(--color-text-muted);
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 0.5rem;
   }
   .about__list-item:last-child { border-bottom: none; }
@@ -151,9 +203,47 @@ const tools = [
     content: '';
     width: 6px;
     height: 6px;
+    margin-top: 0.5em;
     border-radius: 50%;
     background: var(--color-accent);
     flex-shrink: 0;
+  }
+
+  /* ELEMENT: about__list-content */
+  .about__list-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.35rem;
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  /* ELEMENT: about__list-link */
+  .about__list-link {
+    display: block;
+  }
+
+  /* ELEMENT: about__cert-link */
+  .about__cert-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.2rem 0.5rem;
+    border: 1px solid black;
+    border-radius: var(--radius-sm, 4px);
+    font-size: 0.8rem;
+    white-space: nowrap;
+    color: var(--color-text-muted);
+    flex-shrink: 0;
+  }
+  .about__cert-link:hover {
+    color: var(--color-accent);
+    border-color: var(--color-accent);
+  }
+  .about__cert-link:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
   }
 
   @media (max-width: 900px) {
