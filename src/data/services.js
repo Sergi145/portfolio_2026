@@ -1,22 +1,23 @@
 // src/data/services.js
+// Qué aporto a un equipo: maquetación, responsive y accesibilidad.
 
 export const services = [
   {
     icon: '🖥️',
-    title: 'Maquetación web',
+    title: 'Maquetación fiel y mantenible',
     description:
-      'Conversión de diseños Figma o XD en código HTML + SASS limpio, semántico y organizado con BEM. Entrega lista para integrar en cualquier CMS o framework.',
+      'Convierto diseños de Figma o XD en HTML semántico y SASS organizado con BEM. Componentes reutilizables, listos para integrar en un CMS como OpenCms o en un framework.',
   },
   {
     icon: '📱',
-    title: 'Adaptación responsive',
+    title: 'Interfaces responsive',
     description:
-      'Interfaces que funcionan a la perfección en móvil, tablet y escritorio. Estrategia mobile-first con breakpoints bien definidos y pruebas reales en dispositivos.',
+      'Enfoque mobile-first con breakpoints bien definidos. Reviso el resultado en móvil, tablet y escritorio antes de darlo por terminado.',
   },
   {
-    icon: '⚡',
-    title: 'QA de interfaces',
+    icon: '♿',
+    title: 'Accesibilidad y QA',
     description:
-      'Auditoría de accesibilidad basada en los estándares WCAG, evaluando el cumplimiento de los criterios esenciales (A, AA y AAA) para garantizar que el sitio pueda ser utilizado por todas las personas, incluidas aquellas con discapacidades visuales, motoras, auditivas o cognitivas.',
+      'Audito con los criterios WCAG (A, AA y AAA) combinando herramientas automáticas y pruebas manuales con lectores de pantalla, para que el sitio lo pueda usar cualquier persona, con o sin discapacidad visual, motora, auditiva o cognitiva.',
   }
 ];

@@ -1,14 +1,33 @@
 // src/data/skills.js
 
-export const hardSkills = [
-  { name: 'HTML semántico',    level: 100 },
-  { name: 'CSS3 / SASS',       level: 95 },
-  { name: 'Metodología BEM',   level: 96 },
-  { name: 'JavaScript ES6+',   level: 60 },
-  { name: 'Astro Framework',   level: 60 },
-  { name: 'Accesibilidad WCAG', level: 85 },
-  { name: 'Git & GitHub',      level: 70 },
-    { name: 'Lectores pantallas',      level: 60 },
+// Agrupadas por área (no por nivel) para que se puedan escanear rápido.
+// `variant` reutiliza los colores de .tag (sin valor = violeta por defecto).
+export const skillGroups = [
+  {
+    title: 'Maquetación',
+    items: [
+      'HTML5 semántico', 'CSS3', 'SASS/SCSS', 'BEM', 'Atomic Design',
+      'Bootstrap 3/4', 'Pug', 'Handlebars', 'Responsive mobile-first',
+    ],
+  },
+  {
+    title: 'JavaScript y frameworks',
+    variant: 'green',
+    items: ['JavaScript ES6+', 'jQuery', 'Astro'],
+  },
+  {
+    title: 'Accesibilidad',
+    variant: 'orange',
+    items: [
+      'WCAG 2.2 AA', 'NVDA', 'TalkBack', 'Siteimprove', 'WAVE',
+      'axe DevTools', 'Lighthouse', 'Observatorio de Accesibilidad',
+    ],
+  },
+  {
+    title: 'Herramientas y CMS',
+    variant: 'gray',
+    items: ['Git & GitHub', 'OpenCms', 'Oracle (básico)', 'Figma / Adobe XD'],
+  },
 ];
 
 export const softSkills = [
@@ -34,7 +53,7 @@ export const softSkills = [
     icon: '🤝',
     name: 'Trabajo en equipo',
     description:
-      'Colaboro fluidamente con diseñadores, desarolladores y clientes finales, adaptando mi lenguaje al interlocutor.',
+      'Colaboro fluidamente con diseñadores, desarrolladores y clientes finales, adaptando mi lenguaje al interlocutor.',
   },
   {
     icon: '📚',

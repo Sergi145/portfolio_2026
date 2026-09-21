@@ -1,7 +1,7 @@
 ---
 // src/components/Skills.astro
 
-import { hardSkills, softSkills } from '../data/skills.js';
+import { skillGroups, softSkills } from '../data/skills.js';
 ---
 
 <section class="section section--alt" id="habilidades" aria-labelledby="skills-title">
@@ -14,31 +14,17 @@ import { hardSkills, softSkills } from '../data/skills.js';
 
       <!-- Hard skills -->
       <div class="skills__col">
-        <h3 class="skills__col-title" id="hability-a">Habilidades técnicas</h3>
-        <ul role="list" aria-labelledby="hability-a">
-          {hardSkills.map(({ name, level }) => (
-            <li class="skill-item">
-              <div class="skill-item__top">
-                <span>{name}</span>
-                <span aria-label={`Nivel ${level}%`}>{level}%</span>
-              </div>
-              <div
-                class="skill-item__bar"
-                role="progressbar"
-                aria-valuenow={level}
-                aria-valuemin={0}
-                aria-valuemax={100}
-                aria-label={`${name} ${level}%`}
-              >
-                <div
-                  class="skill-item__fill"
-                  style={`--bar-width: ${level}%`}
-                  data-width={`${level}%`}
-                />
-              </div>
-            </li>
-          ))}
-        </ul>
+        <h3 class="skills__col-title">Habilidades técnicas</h3>
+        {skillGroups.map(({ title, variant, items }, i) => (
+          <div class="skill-group">
+            <h4 class="skill-group__title" id={`skill-group-${i}`}>{title}</h4>
+            <ul class="skill-group__list" role="list" aria-labelledby={`skill-group-${i}`}>
+              {items.map((item) => (
+                <li><span class={`tag${variant ? ` tag--${variant}` : ''}`}>{item}</span></li>
+              ))}
+            </ul>
+          </div>
+        ))}
       </div>
 
       <!-- Soft skills -->
@@ -83,39 +69,25 @@ import { hardSkills, softSkills } from '../data/skills.js';
   }
 
   /* =============================================
-     BLOCK: skill-item
+     BLOCK: skill-group
   ============================================= */
-  .skill-item { margin-bottom: var(--space-sm); }
+  .skill-group { margin-bottom: var(--space-md); }
 
-  /* ELEMENT: skill-item__top */
-  .skill-item__top {
+  /* ELEMENT: skill-group__title */
+  .skill-group__title {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-xs);
+  }
+
+  /* ELEMENT: skill-group__list */
+  .skill-group__list {
     display: flex;
-    justify-content: space-between;
-    font-size: 0.875rem;
-    font-weight: 500;
-    margin-bottom: 0.3rem;
-  }
-
-  /* ELEMENT: skill-item__bar */
-  .skill-item__bar {
-    height: 6px;
-    background: var(--color-surface-alt);
-    border-radius: var(--radius-pill);
-    overflow: hidden;
-  }
-
-  /* ELEMENT: skill-item__fill */
-  .skill-item__fill {
-    height: 100%;
-    width: 0;
-    background: var(--color-accent);
-    border-radius: var(--radius-pill);
-    transition: width 1s ease;
-  }
-
-  /* MODIFIER: is-animated (añadido por JS) */
-  .skill-item__fill.is-animated {
-    width: var(--bar-width);
+    flex-wrap: wrap;
+    gap: 0.4rem;
   }
 
   /* =============================================
@@ -162,22 +134,3 @@ import { hardSkills, softSkills } from '../data/skills.js';
     .skills__grid { grid-template-columns: 1fr; }
   }
 </style>
-
-<script>
-  // JavaScript vanilla — animar barras al hacer scroll
-  const fills = document.querySelectorAll('.skill-item__fill');
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-animated');
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.3 }
-  );
-
-  fills.forEach((el) => observer.observe(el));
-</script>

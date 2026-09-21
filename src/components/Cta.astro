@@ -1,16 +1,21 @@
 ---
 // src/components/Cta.astro
+import { profile } from '../data/profile.js';
 ---
 
 <section class="cta" id="contacto" aria-labelledby="cta-title">
   <div class="container">
     <h2 class="cta__title" id="cta-title">
-      ¿Quieres contactar<br />
-      <span class="cta__title-highlight">conmigo</span>?
+      Estoy abierto a nuevas<br />
+      <span class="cta__title-highlight">oportunidades</span>
     </h2>
+    <p class="cta__desc">
+      Busco incorporarme a un equipo de front-end donde la calidad del código y la accesibilidad
+      cuenten. Escríbeme por correo o LinkedIn.
+    </p>
     <div class="cta__actions">
       <a
-        href="mailto:sergipicazo14@gmail.com"
+        href={`mailto:${profile.email}`}
         class="btn btn--primary"
       >
         Escribirme ahora <span class="visually-hidden">por correo electrónico</span>
@@ -23,7 +28,7 @@
         </svg>
       </a>
       <a
-        href="https://www.linkedin.com/in/sergi-picazo-cami-a21766105/"
+        href={profile.linkedin}
         class="btn btn--outline-light"
         target="_blank"
         rel="noopener noreferrer"
@@ -51,6 +56,7 @@
     font-family: var(--font-display);
     font-size: clamp(1.8rem, 5vw, 3rem);
     font-weight: 800;
+    line-height: 1.15;
     letter-spacing: -0.03em;
     margin-bottom: var(--space-sm);
   }
