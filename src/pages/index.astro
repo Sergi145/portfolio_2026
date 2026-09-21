@@ -14,6 +14,7 @@ import Footer       from '../components/Footer.astro';
 
 import { services } from '../data/services.js';
 import { projects } from '../data/projects.js';
+import { personalProjects } from '../data/personalProjects.js';
 
 ---
 
@@ -25,16 +26,14 @@ import { projects } from '../data/projects.js';
     <!-- HERO -->
     <Hero />
 
-   
-
     <!-- SOBRE MÍ -->
     <About />
 
-    <!-- SERVICIOS -->
-    <section class="section section--alt" id="servicios" aria-labelledby="services-title">
+    <!-- QUÉ APORTO -->
+    <section class="section section--alt" id="aporte" aria-labelledby="services-title">
       <div class="container">
         <div class="section__header">
-          <h2 class="section__title" id="services-title">Servicios</h2>
+          <h2 class="section__title" id="services-title">Qué aporto a tu equipo</h2>
         </div>
         <ul class="services-grid" role="list">
           {services.map((service) => (
@@ -46,14 +45,34 @@ import { projects } from '../data/projects.js';
       </div>
     </section>
 
-    <!-- PROYECTOS DESTACADOS -->
+    <!-- EXPERIENCIA Y PROYECTOS -->
     <section class="section" id="proyectos" aria-labelledby="projects-title">
       <div class="container">
-        <div class="section__header">
-          <h2 class="section__title" id="projects-title">Proyectos destacados</h2>
+        <div class="section__header section__header--stacked">
+          <h2 class="section__title" id="projects-title">Experiencia y proyectos</h2>
+          <p class="section__intro">
+            <strong>Altran / Capgemini · Maquetador Web · 2018–2026.</strong>
+            Proyectos para la Generalitat de Catalunya y Telefónica.
+          </p>
         </div>
         <ul class="projects-list" role="list">
           {projects.map((project) => (
+            <li>
+              <ProjectCard project={project} />
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <!-- PROYECTOS PERSONALES -->
+    <section class="section section--alt" id="proyectos-personales" aria-labelledby="personal-projects-title">
+      <div class="container">
+        <div class="section__header">
+          <h2 class="section__title" id="personal-projects-title">Proyectos personales</h2>
+        </div>
+        <ul class="projects-list" role="list">
+          {personalProjects.map((project) => (
             <li>
               <ProjectCard project={project} />
             </li>
@@ -75,12 +94,6 @@ import { projects } from '../data/projects.js';
 
 <style>
   /* Grids de la página */
-  .posts-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: var(--space-md);
-  }
-
   .services-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
@@ -94,7 +107,6 @@ import { projects } from '../data/projects.js';
   }
 
   @media (max-width: 640px) {
-    .posts-grid,
     .services-grid {
       grid-template-columns: 1fr;
     }

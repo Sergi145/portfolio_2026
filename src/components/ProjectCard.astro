@@ -1,20 +1,20 @@
 ---
 // src/components/ProjectCard.astro
-// src/components/Hero.astro
-import { Image } from 'astro:assets';
-import telefonica from '../assets/telefonica.jpg';
-import cv from '../assets/curriculum_sergi.pdf';
 
 const { project } = Astro.props;
 const {
   title,
   year,
+  status,
   category,
   categoryVariant,
   thumbImage,
+  thumbWidth,
+  thumbHeight,
   thumbAlt,
   challenge,
-  solution,
+  url,
+  urlLabel,
   tech,
 } = project;
 
@@ -24,24 +24,48 @@ const tagClass = categoryVariant ? `tag--${categoryVariant}` : 'tag--gray';
 <article class="project-card">
 
   <div class="project-card__thumb">
-    <img src={thumbImage} alt={thumbAlt}/>
+    <img
+      src={thumbImage}
+      alt={thumbAlt}
+      width={thumbWidth}
+      height={thumbHeight}
+      loading="lazy"
+      decoding="async"
+    />
   </div>
 
   <div class="project-card__body">
     <header class="project-card__header">
       <h3 class="project-card__title">{title}</h3>
       <span class="project-card__year">{year}</span>
+      {status && <span class="tag tag--orange">{status}</span>}
       <span class={`tag ${tagClass}`}>{category}</span>
     </header>
 
     <div class="project-card__block">
-      <p class="project-card__block-label">Funciones</p>
+      <p class="project-card__block-label">Mi trabajo</p>
       <p class="project-card__block-text">{challenge}</p>
     </div>
 
-    <div class="project-card__block">
-      <a href={solution} class="project-card__block-text">{solution}</a>
-    </div>
+    {url && (
+      <div class="project-card__block">
+        <a
+          href={url}
+          class="project-card__link"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {urlLabel ?? 'Ver sitio web'}<span class="visually-hidden"> de {title} (se abre en una pestaña nueva)</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round"
+            aria-hidden="true" focusable="false">
+            <path d="M7 17 17 7" />
+            <path d="M8 7h9v9" />
+          </svg>
+        </a>
+      </div>
+    )}
 
     <ul class="project-card__tech" aria-label="Tecnologías usadas" role="list">
       {tech.map((t) => (
@@ -83,12 +107,8 @@ const tagClass = categoryVariant ? `tag--${categoryVariant}` : 'tag--gray';
     color: rgba(255, 255, 255, 0.5);
   }
 
-  /* MODIFIERS: color de fondo del thumbnail */
-  .project-card__thumb--dark   { background: #1a1a2e; }
-  .project-card__thumb--violet { background: linear-gradient(135deg, #6c3fce, #a35cff); }
-  .project-card__thumb--green  { background: linear-gradient(135deg, #0d6e4b, #1db97a); }
-  .project-card__thumb--coral  { background: linear-gradient(135deg, #b83224, #b73a1a); }
-  .project-card__thumb--slate  { background: linear-gradient(135deg, #2d3954, #4c6fb5); }
+  /* Con width/height en el HTML, el alto debe seguir la proporción */
+  .project-card__thumb img { height: auto; }
 
   /* ELEMENT: project-card__body */
   .project-card__body { padding: var(--space-md); }
@@ -142,6 +162,20 @@ const tagClass = categoryVariant ? `tag--${categoryVariant}` : 'tag--gray';
     line-height: 1.6;
     word-wrap: break-word;
   }
+
+  /* ELEMENT: project-card__link */
+  .project-card__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color var(--transition);
+  }
+  .project-card__link:hover { color: var(--color-accent-hover); }
 
   /* ELEMENT: project-card__tech */
   .project-card__tech {

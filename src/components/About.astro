@@ -4,6 +4,7 @@ import saraCert from '../assets/certificates/sara_souiedan.pdf';
 import weaaareAuditorias from '../assets/certificates/Certificado - Auditorías de Accesibilidad Digital - weAAAre.pdf';
 import weaaareMovil from '../assets/certificates/Certificado - Introducción a la accesibilidad móvil - weAAAre.pdf';
 import weaaareNvda from '../assets/certificates/Certificado - Pruebas de accesibilidad con lector de pantalla NVDA - weAAAre.pdf';
+import { yearsExperience } from '../data/profile.js';
 
 // En dev, Astro sirve los assets importados de src/assets sin el prefijo `base`
 // configurado en astro.config.mjs, pero su middleware de dev exige ese prefijo
@@ -36,21 +37,6 @@ const formacion = [
   },
 ];
 
-const tools = [
-  { label: 'HTML5' },
-  { label: 'CSS3' },
-  { label: 'SASS/SCSS' },
-  { label: 'JavaScript ES6+' },
-  { label: 'BEM' },
-  { label: 'Astro',         variant: 'brown' },
-  { label: 'Git & GitHub',  variant: 'green' },
-  { label: 'NVDA',         variant: 'orange' },
-  { label: 'TallBack',         variant: 'orange' },
-  { label: 'Siteimprove',     variant: 'gray' },
-  { label: 'WAVE',     variant: 'gray' },
-  { label: 'Lighthouse',    variant: 'gray' },
-  { label: 'axe DevTools',  variant: 'gray' },
-];
 ---
 
 <section class="section section--alt" id="sobre-mi" aria-labelledby="about-title">
@@ -64,40 +50,26 @@ const tools = [
       <div class="about__text">
         <h3 class="about__subtitle">Mi enfoque de trabajo</h3>
         <p class="about__paragraph">
-          Soy un maquetador web con más de 5 años transformando diseños en interfaces que no solo
-          se ven bien, sino que también funcionan excepcionalmente en cualquier dispositivo y son
-          accesibles para todas las personas.
+          Soy maquetador front-end y llevo {yearsExperience} años convirtiendo diseños en interfaces
+          que funcionan en cualquier dispositivo y que pueden usar todas las personas. He trabajado
+          en proyectos para la Generalitat de Catalunya y Telefónica dentro de Altran / Capgemini.
         </p>
         <p class="about__paragraph">
-          Mi metodología parte del <strong>HTML semántico</strong> como base sólida, construyo la
-          arquitectura de estilos con <strong>SASS</strong> siguiendo la metodología <strong>BEM</strong>
-          para garantizar componentes reutilizables y mantenibles, e integro todo en
-          <strong>Astro</strong> para conseguir sitios ultra-rápidos con cero JavaScript innecesario.
+          Parto de <strong>HTML semántico</strong>, organizo los estilos con <strong>SASS</strong> y
+          metodología <strong>BEM</strong> para que los componentes sean reutilizables y fáciles de
+          mantener, y uso <strong>Astro</strong> cuando el proyecto pide una web rápida y sin
+          JavaScript innecesario.
         </p>
         <p class="about__paragraph">
-          Me apasiona la accesibilidad: aplico las <strong>WCAG 2.2 nivel AA</strong> no como un
-          requisito, sino como parte natural de mi proceso. Creo firmemente que una web bien
-          construida debe ser para todo el mundo.
+          La accesibilidad forma parte de mi proceso desde el principio, no llega al final como
+          revisión. Aplico las <strong>WCAG 2.2 nivel AA</strong>, pruebo con NVDA y TalkBack, y he
+          elaborado informes de accesibilidad con Siteimprove y el Observatorio de Accesibilidad
+          del Gobierno de España.
         </p>
-
-        <h3 class="about__subtitle">Herramientas que domino</h3>
-        <ul class="about__tools" role="list" aria-label="Tecnologías y herramientas">
-          {tools.map(({ label, variant }) => (
-            <li>
-              <span class={`tag${variant ? ` tag--${variant}` : ''}`}>{label}</span>
-            </li>
-          ))}
-        </ul>
       </div>
 
       <div>
         <div class="about__card">
-          <h3 class="about__card-title">Experiencia</h3>
-          <ul class="about__list" role="list">
-            <li class="about__list-item">Altran / Capgemini - Maquetador Web (2018–2026)</li>
-          </ul>
-        </div>
-        <div class="about__card about__card--mt">
           <h3 class="about__card-title">Formación</h3>
           <ul class="about__list" role="list">
             {formacion.map(({ title, href, cert }) => (
@@ -161,14 +133,6 @@ const tools = [
     line-height: 1.75;
   }
 
-  /* ELEMENT: about__tools */
-  .about__tools {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-top: var(--space-sm);
-  }
-
   /* BLOCK: about__card */
   .about__card {
     background: var(--color-bg);
@@ -176,9 +140,6 @@ const tools = [
     border-radius: var(--radius-md);
     padding: var(--space-md);
   }
-
-  /* MODIFIER: about__card--mt */
-  .about__card--mt { margin-top: var(--space-sm); }
 
   /* ELEMENT: about__card-title */
   .about__card-title {
