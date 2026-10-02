@@ -19,4 +19,21 @@ export const personalProjects = [
     urlLabel: 'Ver aplicación',
     tech: ['Angular', 'TypeScript', 'localStorage', 'WCAG', 'Vercel'],
   },
+  {
+    id: 'Libreria Componentes Accesibles',
+    title: 'Librería de Componentes Accesibles',
+    year: '2026',
+    status: 'En desarrollo',
+    category: 'Librería de componentes',
+    categoryVariant: 'green',
+    thumbImage: 'projects/libreria-componentes-accesibles.png',
+    thumbWidth: 1280,
+    thumbHeight: 800,
+    thumbAlt: 'Captura de la página de documentación del componente Accordion en la Librería de Componentes Accesibles',
+    challenge:
+      'Librería de componentes de UI accesibles construidos con HTML, CSS y JavaScript nativos, sin framework. Cada componente vive en su propia carpeta y es independiente: se puede copiar o importar por separado. Funciona con mejora progresiva (HTML semántico operativo sin JS) y el JavaScript añade gestión de foco y estados ARIA dinámicos.',
+    url: 'https://libreria-componentes-accesibles.vercel.app/?path=/docs/componentes-accordion--docs',
+    urlLabel: 'Ver componentes',
+    tech: ['HTML', 'CSS', 'JavaScript', 'ARIA', 'Storybook'],
+  },
 ];
