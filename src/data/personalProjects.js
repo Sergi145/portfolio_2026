@@ -36,4 +36,20 @@ export const personalProjects = [
     urlLabel: 'Ver componentes',
     tech: ['HTML', 'CSS', 'JavaScript', 'ARIA', 'Storybook'],
   },
+  {
+    id: 'Informe Auditoria Policia',
+    title: 'Informe de auditoría de accesibilidad: policia.es',
+    year: '2026',
+    category: 'Auditoría de accesibilidad',
+    categoryVariant: 'green',
+    thumbImage: 'projects/informe-auditoria-policia.png',
+    thumbWidth: 1280,
+    thumbHeight: 800,
+    thumbAlt: 'Captura de la página de inicio del portal web de la Policía Nacional (policia.es), con el menú principal, el carrusel de imagen y las tarjetas de acceso rápido',
+    challenge:
+      'Auditoría de accesibilidad (WCAG 2.2 AA) de la página de inicio del portal de la Policía Nacional. Lighthouse da un 100 sobre 100 y WAVE no detecta ningún error, pero la revisión manual con teclado y lectores de pantalla (VoiceOver, TalkBack y NVDA) encontró 10 incidencias: 3 críticas, 6 moderadas y 1 leve. Es un ejemplo de por qué las herramientas automáticas no bastan y siempre hace falta una auditoría manual.',
+    url: `${import.meta.env.BASE_URL}informes/auditoria-policia.html`,
+    urlLabel: 'Ver informe',
+    tech: ['WCAG 2.2 AA', 'Lighthouse', 'axe DevTools', 'WAVE', 'NVDA', 'VoiceOver', 'TalkBack'],
+  },
 ];
